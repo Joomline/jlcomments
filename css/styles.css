@@ -1,0 +1,89 @@
+ul.tabs {
+    margin-bottom: -1px;
+    padding: 0 5px 0 0px;
+  background-color: transparent!important;
+  background-image: none!important;
+  background: transparent none!important;
+  border: 1px solid #FFFFFF!important
+}
+
+ul.tabs li.tab {
+    color: #444444;
+    display: inline-block;
+    margin-left: 5px;
+    padding: 4px 8px 5px 8px!important;
+    list-style: none;
+    background-color: #efefef;
+    border: 1px #aaaaaa solid;
+    -moz-border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    border-radius: 5px 5px 0 0;
+    cursor: pointer;
+  margin-bottom: -1px;
+  padding-bottom: 4px!important
+}
+
+li.tab.delete{
+    padding: 6px 28px 3px 8px;	
+	    margin-right: -20px;
+	}
+
+li.tab:hover {
+    background-color: #ffffff;
+}
+
+li.tab:focus {
+    outline: none;
+    border: 1px;
+    margin: -2px -1px -2px 4px;
+}
+
+li.tab.delete:focus {
+    outline: none;
+    border: 1px;
+    border-bottom: 0px solid #ffffff;
+    margin: -2px -21px -2px 4px;
+}
+
+li.tab.active {
+    color: #111111;
+    background-color: #ffffff!important;
+    border-bottom-color: #ffffff!important;
+}
+
+li.tab .remove {
+    padding-right: 5px;
+    margin-left: 5px;
+}
+
+div.content {
+    margin: 0 5px 1em 0;
+    padding: 8px 8px 8px 8px;
+    border-top: 1px #aaaaaa solid;
+  margin-top: -2px
+}
+
+
+ul.tabs span {
+	cursor:pointer;
+	position:relative;
+	top:2px;
+	right:5px;
+    padding: 0px 3px 2px 3px;
+}
+
+ul.tabs span img:focus {
+    outline: none;
+    border: 2px dotted #cc0000;
+	margin:-2px -2px -2px -2px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border-radius: 4px 4px 4px 4px;
+}
+
+ul.tabs span img {
+    border: 0;
+    margin: 0;
+    padding: 4px;
+}
+

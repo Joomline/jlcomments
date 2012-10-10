@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension version="1.6" type="plugin" group="content">
+	<name>JoomLine comments</name>
+	<author>JoomLine</author>
+	<creationDate>Sep 2011</creationDate>
+	<copyright>(C) 2011 by Kunitsyn Vadim(http://www.joomline.ru)</copyright>
+	<license>GNU/GPL: http://www.gnu.org/copyleft/gpl.html</license>
+	<authorEmail>vadim@joomline.ru</authorEmail>
+	<authorUrl>http://joomline.ru</authorUrl>
+	<version>2.0</version>
+	<description>Plugin allow integrate VK comments and Facebook comments into your joomla based site</description>
+	<files>
+		<filename plugin="jlcomments">jlcomments.php</filename>
+		<filename>index.html</filename>
+		<filename>css/index.html</filename>
+		<filename>css/styles.css</filename>
+		<filename>js/index.html</filename>
+		<filename>js/demo.js</filename>
+		<filename>js/tabPane.js</filename>
+
+	</files>
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+				<field name="tp1" type="spacer" class="text" label="Настройки для Вконтакта"/>	
+				<field name="showvkontakte" type="radio" default="0" label="Включить вкладку" description="Обновление ленты комментариев в реальном времени">
+				  <option value="0">Нет</option>
+				  <option value="1">Да</option>
+				</field>
+				<field name="apiId" type="text" label="api ID от Vkontakte" default="api ID"/>
+				<field name="autoAdd" type="radio" default="0" label="Автодобавление" description="Укажите нужно ли автоматически добавлять форму комментариев к каждой статье">
+				  <option value="0">Нет</option>
+				  <option value="1">Да</option>
+				</field>
+				<field name="attach" type="list" default="*" label="Прикрепление файлов" description="Задает возможность создания прикреплений к комментариям">
+				  <option value="*">Все</option>
+				  <option value="false">Отключить</option>
+				  <option value="graffiti">Графити</option>
+				  <option value="photo">Фото</option>
+				  <option value="audio">Аудито</option>
+				  <option value="video">Видео</option>
+				  <option value="link">Ссылки</option>
+				</field>
+				<field name="autoPublish" type="radio" default="1" label="Автопубликация" description="Автоматическая публикация комментария в статус пользователю">
+				  <option value="0">Нет</option>
+				  <option value="1">Да</option>
+				</field>
+				<field name="norealtime" type="radio" default="0" label="Автообновление" description="Обновление ленты комментариев в реальном времени">
+				  <option value="1">Нет</option>
+				  <option value="0">Да</option>
+				</field>
+				<field name="tp2" type="spacer" class="text" label="Настройки для Facebook"/>	
+				<field name="showfacebook" type="radio" default="0" label="Включить вкладку" description="Обновление ленты комментариев в реальном времени">
+				  <option value="0">Нет</option>
+				  <option value="1">Да</option>
+				</field>
+				<field name="fbId" type="text" label="Id Facebook" default=""/>
+				<field name="fbadmin" type="text" label="Модераторы Facebook" description="Введите имена пользователей через запятую" default=""/>
+				<field name="fb_lang" type="list" default="ru_RU" label="Язык Facebook" description="Выберите язык виджета">
+				  <option value="ru_RU">Русский</option>
+				  <option value="en_US">Английскй</option>
+				</field>
+				<field name="tp3" type="spacer" class="text" label="Общие настройки"/>	
+				<field name="showjcomments" type="radio" default="0" label="Включить вкладку jcomments" description="Обновление ленты комментариев в реальном времени">
+				  <option value="0">Нет</option>
+				  <option value="1">Да</option>
+				</field>
+				<field name="comLimit" type="text" label="Количество комментариев" default="10"/>
+				<field name="orders" type="text" label="Порядок вкладок" default="1,2,3" decription="1  Jcomments, 2  Vkontakte, 3 Facebook"/>
+				<field name="width" type="text" label="Ширина комментариев" default="500" description="Укажите ширину блока комментраиев. Если указано 0 - то по ширине страницы"/>
+				<field name="categories" type="category" extension='com_content' default="0" multiple="multiple"
+						label="Исключить категории"
+						description="Укажите категории в которых не будет добавляться виджет комментариев"/>
+				
+			</fieldset>
+
+		</fields>
+	</config>
+</extension>
