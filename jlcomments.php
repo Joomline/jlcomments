@@ -27,9 +27,6 @@ class plgContentJlcomments extends JPlugin
 			return true;
 		}
 
-		
-		
-			
 		$exceptcat = is_array($this->params->def('categories')) ? $this->params->def('categories') : array($this->params->def('categories'));
 		if (!in_array($article->catid,$exceptcat)) {
 			$view = JRequest::getCmd('view');
@@ -72,26 +69,24 @@ class plgContentJlcomments extends JPlugin
 					}
 				If ($typeviewerbs==1) {
 					$doc->addCustomTag('<script src="http://yandex.st/bootstrap/2.3.0/js/bootstrap.min.js"></script>');
-					$doc->addStyleSheet("http://yandex.st/bootstrap/2.3.0/css/bootstrap.min.css");
+					$doc->addStyleSheet("/plugins/content/jlcomments/css/jlcomtabs.css");
 					}
 				If ($typeviewernojq==1) {
 					$doc->addCustomTag ('<script type="text/javascript">var jqjlcomm = jQuery.noConflict();</script>');
 					}
 				else {}
 				
-$comments = JPATH_SITE . '/components/com_jcomments/jcomments.php';
-  if (file_exists($comments)) {
-    require_once($comments);
-    $options = array();
-    $options['object_id'] = $id;
-    $options['object_group'] = 'com_content';
-    $options['published'] = 1;
-    $count = JCommentsModel::getCommentsCount($options);
-
-  }
+                $comments = JPATH_SITE . '/components/com_jcomments/jcomments.php';
+                  if (file_exists($comments)) {
+                    require_once($comments);
+                    $options['object_id'] = $id;
+                    $options['object_group'] = 'com_content';
+                    $options['published'] = 1;
+                    $count = JCommentsModel::getCommentsCount($options);
+                  }
 				
-			$scriptPage = <<<HTML
-			<ul class="nav nav-tabs" id="plgjlcomments">
+	$scriptPage = <<<HTML
+		<ul class="nav nav-tabs" id="plgjlcomments">
 HTML;
 
 
@@ -140,9 +135,9 @@ HTML;
 						
 					}
 				
-			$scriptPage .= <<<HTML
-                    </ul>
-					<div class="tab-content">
+	$scriptPage .= <<<HTML
+        </ul>
+		<div class="tab-content">
 HTML;
 	foreach ($orders as $order) {		
 			switch($order) {		
@@ -200,7 +195,6 @@ HTML;
 					jQuery('#plgjlcomments a:first').tab('show');
 					});
 				</script>
-				<div class="g-commentcount" data-href="$article_url"></div>
 								<div style="text-align: right;">
 									<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://joomline.ru/rasshirenija/plugin/jlcomments.html">Социальные комментарии joomla</a>
 								</div>
@@ -219,6 +213,5 @@ HTML;
 		}
 
 	}
-
 
 }
