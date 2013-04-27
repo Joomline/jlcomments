@@ -49,6 +49,9 @@ class plgContentJlcomments extends JPlugin
 				$fbId = $this->params->def('fbId');
 				$fbadmin = $this->params->def('fbadmin');
 				$fb_lang = $this->params->def('fb_lang');
+				$typeviewerjq 	= $this->params->def('typeviewerjq');
+				$typeviewerbs 	= $this->params->def('typeviewerbs');
+				$typeviewernojq = $this->params->def('typeviewernojq');
 				
 				$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
 				$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
@@ -62,21 +65,30 @@ class plgContentJlcomments extends JPlugin
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
 				
-				$typeviewerjq 	= $params->get('typeviewerjq');
-				$typeviewerbs 	= $params->get('typeviewerbs');
-				$typeviewernojq = $params->get('typeviewernojq');
+
 				
 				If ($typeviewerjq==1) {
 					$doc->addCustomTag('<script src="http://yandex.st/jquery/1.9.1/jquery.min.js"></script>');
 					}
 				If ($typeviewerbs==1) {
 					$doc->addCustomTag('<script src="http://yandex.st/bootstrap/2.3.0/js/bootstrap.min.js"></script>');
-					$doc->addStyleSheet("plugins/content/jlcomments/css/jlcomtabs.css");
+					$doc->addStyleSheet("http://yandex.st/bootstrap/2.3.0/css/bootstrap.min.css");
 					}
 				If ($typeviewernojq==1) {
 					$doc->addCustomTag ('<script type="text/javascript">var jqjlcomm = jQuery.noConflict();</script>');
 					}
 				else {}
+				
+$comments = JPATH_SITE . '/components/com_jcomments/jcomments.php';
+  if (file_exists($comments)) {
+    require_once($comments);
+    $options = array();
+    $options['object_id'] = $id;
+    $options['object_group'] = 'com_content';
+    $options['published'] = 1;
+    $count = JCommentsModel::getCommentsCount($options);
+
+  }
 				
 			$scriptPage = <<<HTML
 			<ul class="nav nav-tabs" id="plgjlcomments">
@@ -87,14 +99,14 @@ HTML;
 	foreach ($orders as $order) {
 				switch($order) {
 					case 1:	if ($this->params->def('showjcomments')) { $scriptPage .= <<<HTML
-						<li style="list-style-type: none;" class="active"><a data-target="#jcommentscomm" href="#" data-toggle="tab">jcomments</a></li>
+						<li style="list-style-type: none;" class="active"><a data-target="#jcommentscomm" href="#" data-toggle="tab">Комментарии ($count)</a></li>
 HTML;
 						} else {$scriptPage .='';$showjcomments='-1';} break;
 					case 2:	if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
 										<script type="text/javascript">
 										jQuery(document).ready(function(){
 											jQuery.ajax({
-												url: "https://api.vk.com/method/widgets.getComments.json?widget_api_id=3377224&page_id=1",
+												url: "https://api.vk.com/method/widgets.getComments.json?widget_api_id=$apiId&page_id=$pagehash",
 												dataType: 'jsonp',
 												success: function(data){
 													jQuery('#vk_count').text(data.response.count); 
@@ -106,20 +118,20 @@ HTML;
 										});
 										</script>
 									<li style="list-style-type: none;">
-									<a href="#" data-target="#vkcomm" data-toggle="tab">Вконтакте <span id="vk_count"></span></a>
+									<a href="#" data-target="#vkcomm" data-toggle="tab">Вконтакте (<span id="vk_count"></span>)</a>
 									</li>
 HTML;
 						} else {$scriptPage .='';} break;
 					case 3:	if ($this->params->def('googleplus')) { $scriptPage .= <<<HTML
 					
-						<li style="list-style-type: none;"><a href="#" data-target="#googlecomm" data-toggle="tab">Google+ <div class="g-commentcount" data-href="$article_url"></div></a></li>
+						<li style="list-style-type: none;"><a href="#" data-target="#googlecomm" data-toggle="tab">Google+</a></li>
 
 									
 
 HTML;
 						} else {$scriptPage .='';} break;
 					case 4:	if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
-						<li style="list-style-type: none;"><a href="#" data-target="#fbcomm" data-toggle="tab"><div>Facebook <fb:comments-count $article_url/> </fb:comments-count>comments</div></a></li>
+						<li style="list-style-type: none;"><a href="#" data-target="#fbcomm" data-toggle="tab"><div>Facebook (<fb:comments-count $article_url/> </fb:comments-count>)</div></a></li>
 HTML;
 						} else {$scriptPage .='';} break;
 
@@ -174,7 +186,7 @@ HTML;
 					<div class="fb-comments" data-href="$article_url" data-num-posts="$comLimit" data-width="$width"></div>
 					
 					</div>	
-</span>					
+				
 HTML;
 					} else {$scriptPage .='';} break;
 
@@ -188,6 +200,7 @@ HTML;
 					jQuery('#plgjlcomments a:first').tab('show');
 					});
 				</script>
+				<div class="g-commentcount" data-href="$article_url"></div>
 								<div style="text-align: right;">
 									<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://joomline.ru/rasshirenija/plugin/jlcomments.html">Социальные комментарии joomla</a>
 								</div>
