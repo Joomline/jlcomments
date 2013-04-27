@@ -53,60 +53,118 @@ class plgContentJlcomments extends JPlugin
 				$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
 				$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
 				$doc->addCustomTag('<meta property="fb:app_id" content="'.$fbId.'"/>');
-				$doc->addScript("http://vkontakte.ru/js/api/openapi.js?22");
-				$doc->addScript("/plugins/content/jlcomments/js/tabPane.js");
-				$doc->addScript("/plugins/content/jlcomments/js/demo.js");
-				$doc->addStyleSheet("/plugins/content/jlcomments/css/styles.css");
+				$doc->addScript("//vk.com/js/api/openapi.js?95");
+				$doc->addScript("https://apis.google.com/js/plusone.js");
+			//	$doc->addScript("/plugins/content/jlcomments/js/tabPane.js");
+			//	$doc->addScript("/plugins/content/jlcomments/js/demo.js");
+			//	$doc->addStyleSheet("/plugins/content/jlcomments/css/styles.css");
 				$doc->addScriptDeclaration($script);
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
-			
 				
-				$scriptPage = <<<HTML
-
-                    <span id="demo_small">
-                    <ul class="tabs">
+				$typeviewerjq 	= $params->get('typeviewerjq');
+				$typeviewerbs 	= $params->get('typeviewerbs');
+				$typeviewernojq = $params->get('typeviewernojq');
+				
+				If ($typeviewerjq==1) {
+					$doc->addCustomTag('<script src="http://yandex.st/jquery/1.9.1/jquery.min.js"></script>');
+					}
+				If ($typeviewerbs==1) {
+					$doc->addCustomTag('<script src="http://yandex.st/bootstrap/2.3.0/js/bootstrap.min.js"></script>');
+					$doc->addStyleSheet("plugins/content/jlcomments/css/jlcomtabs.css");
+					}
+				If ($typeviewernojq==1) {
+					$doc->addCustomTag ('<script type="text/javascript">var jqjlcomm = jQuery.noConflict();</script>');
+					}
+				else {}
+				
+			$scriptPage = <<<HTML
+			<ul class="nav nav-tabs" id="plgjlcomments">
 HTML;
+
+
+
 	foreach ($orders as $order) {
 				switch($order) {
 					case 1:	if ($this->params->def('showjcomments')) { $scriptPage .= <<<HTML
-									<li class="tab">jcomments</li>
+						<li style="list-style-type: none;" class="active"><a data-target="#jcommentscomm" href="#" data-toggle="tab">jcomments</a></li>
 HTML;
 						} else {$scriptPage .='';$showjcomments='-1';} break;
 					case 2:	if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
-									<li class="tab">Вконтакте</li>
+										<script type="text/javascript">
+										jQuery(document).ready(function(){
+											jQuery.ajax({
+												url: "https://api.vk.com/method/widgets.getComments.json?widget_api_id=3377224&page_id=1",
+												dataType: 'jsonp',
+												success: function(data){
+													jQuery('#vk_count').text(data.response.count); 
+												},
+												error: function(data){
+													console.log(data);
+												}
+											}); 
+										});
+										</script>
+									<li style="list-style-type: none;">
+									<a href="#" data-target="#vkcomm" data-toggle="tab">Вконтакте <span id="vk_count"></span></a>
+									</li>
 HTML;
 						} else {$scriptPage .='';} break;
-					case 3:	if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
-									<li class="tab">Facebook</li>
+					case 3:	if ($this->params->def('googleplus')) { $scriptPage .= <<<HTML
+					
+						<li style="list-style-type: none;"><a href="#" data-target="#googlecomm" data-toggle="tab">Google+ <div class="g-commentcount" data-href="$article_url"></div></a></li>
+
+									
+
 HTML;
 						} else {$scriptPage .='';} break;
+					case 4:	if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
+						<li style="list-style-type: none;"><a href="#" data-target="#fbcomm" data-toggle="tab"><div>Facebook <fb:comments-count $article_url/> </fb:comments-count>comments</div></a></li>
+HTML;
+						} else {$scriptPage .='';} break;
+
+
 						}
 						
 					}
 				
 			$scriptPage .= <<<HTML
                     </ul>
+					<div class="tab-content">
 HTML;
-			foreach ($orders as $order) {		
+	foreach ($orders as $order) {		
 			switch($order) {		
 					case 1: if ($this->params->def('showjcomments')) { $scriptPage .= <<<HTML
-								<div class="content">
+								<div class="tab-pane active" id="jcommentscomm">
 									{jcomments}
 								</div>
 HTML;
 						} else {$scriptPage .='';$showjcomments='-1';} break;
 					case 2: if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
-								<div class="content">
+														
+								<div class="tab-pane" id="vkcomm">
 									<div id='jlcomments'></div>
 									<script type='text/javascript'>
 									  VK.Widgets.Comments('jlcomments', {limit: $comLimit, width: '$width', attach: '$attach', autoPublish: $autoPublish, norealtime: $norealtime},$pagehash);
 									</script>
 								</div>
+								
 HTML;
-						} else {$scriptPage .='';} break;					  
-					case 3: if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
-                    <div class="content">
+						} else {$scriptPage .='';} break;	
+					case 3: if ($this->params->def('googleplus')) { $scriptPage .= <<<HTML
+					<div class="tab-pane" id="googlecomm">		
+		
+						<div class="g-comments"
+							data-href="$article_url"
+							data-width="$width"
+							data-first_party_property="BLOGGER"
+							data-view_type="FILTERED_POSTMOD">
+						</div>
+						</div>
+HTML;
+						} else {$scriptPage .='';} break;						
+					case 4: if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
+                    <div class="tab-pane" id="fbcomm">
                    		<script>(function(d){
 						var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
 						js = d.createElement('script'); js.id = id; js.async = true;
@@ -114,11 +172,9 @@ HTML;
 						d.getElementsByTagName('head')[0].appendChild(js);
 						}(document));</script>
 					<div class="fb-comments" data-href="$article_url" data-num-posts="$comLimit" data-width="$width"></div>
-					</span>
-					</div>
-					  					    
-
-
+					
+					</div>	
+</span>					
 HTML;
 					} else {$scriptPage .='';} break;
 
@@ -126,6 +182,12 @@ HTML;
 
 }
 				 $scriptPage .= <<<HTML
+				 </div>	
+				 <script type="text/javascript">
+					jQuery(document).ready(function(){
+					jQuery('#plgjlcomments a:first').tab('show');
+					});
+				</script>
 								<div style="text-align: right;">
 									<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://joomline.ru/rasshirenija/plugin/jlcomments.html">Социальные комментарии joomla</a>
 								</div>
