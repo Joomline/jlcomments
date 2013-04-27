@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension version="1.6" type="plugin" group="content" method="upgrade">
-	<name>JoomLine comments</name>
+	<name>PLG_JLCOMMENTS</name>
 	<author>JoomLine</author>
 	<creationDate>Sep 2011</creationDate>
 	<copyright>(C) 2011 by Kunitsyn Vadim(http://www.joomline.ru)</copyright>
@@ -8,72 +8,77 @@
 	<authorEmail>vadim@joomline.ru</authorEmail>
 	<authorUrl>http://joomline.ru</authorUrl>
 	<version>2.0</version>
-	<description>Plugin allow integrate VK comments and Facebook comments into your joomla based site</description>
+	<description>PLG_JLCOMMENTS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="jlcomments">jlcomments.php</filename>
 		<filename>index.html</filename>
 		<folder>js</folder>
 		<folder>css</folder>
-
 	</files>
+	<languages folder="language">
+        <language tag="ru-RU">ru-RU/ru-RU.plg_content_jlcomments.ini</language>
+        <language tag="ru-RU">ru-RU/ru-RU.plg_content_jlcomments.sys.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_content_jlcomments.ini</language>
+        <language tag="en-GB">en-GB/en-GB.plg_content_jlcomments.sys.ini</language>
+    </languages>
 	<config>
 		<fields name="params">
 			<fieldset name="basic">
-				<field name="tp1" type="spacer" class="text" label="Настройки для Вконтакта"/>	
-				<field name="showvkontakte" type="radio" default="0" label="Включить вкладку" description="Обновление ленты комментариев в реальном времени">
-				  <option value="0">Нет</option>
-				  <option value="1">Да</option>
+				<field name="tp1" type="spacer" class="text" label="PLG_JLCOMMENTS_VK_SITTINGS"/>	
+				<field name="showvkontakte" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_VK_DESC">
+				  <option value="0">PLG_JLCOMMENTS_NO</option>
+				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
-				<field name="apiId" type="text" label="api ID от Vkontakte" default="api ID"/>
-				<field name="autoAdd" type="radio" default="0" label="Автодобавление" description="Укажите нужно ли автоматически добавлять форму комментариев к каждой статье">
-				  <option value="0">Нет</option>
-				  <option value="1">Да</option>
+				<field name="apiId" type="text" label="PLG_JLCOMMENTS_APIID_LABEL" default="api ID"/>
+				<field name="autoAdd" type="radio" default="1" label="PLG_JLCOMMENTS_AUTOADD_LABEL" description="PLG_JLCOMMENTS_AUTOADD_DESC">
+				  <option value="0">PLG_JLCOMMENTS_NO</option>
+				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
-				<field name="attach" type="list" default="*" label="Прикрепление файлов" description="Задает возможность создания прикреплений к комментариям">
-				  <option value="*">Все</option>
-				  <option value="false">Отключить</option>
-				  <option value="graffiti">Графити</option>
-				  <option value="photo">Фото</option>
-				  <option value="audio">Аудито</option>
-				  <option value="video">Видео</option>
-				  <option value="link">Ссылки</option>
+				<field name="attach" type="list" default="*" label="PLG_JLCOMMENTS_ATTACH_LABEL" description="PLG_JLCOMMENTS_ATTACH_DESC">
+				  <option value="*">PLG_JLCOMMENTS_ATTACH_ALL</option>
+				  <option value="false">PLG_JLCOMMENTS_ATTACH_OFF</option>
+				  <option value="graffiti">PLG_JLCOMMENTS_ATTACH_GRAFF</option>
+				  <option value="photo">PLG_JLCOMMENTS_ATTACH_PHOTO</option>
+				  <option value="audio">PLG_JLCOMMENTS_ATTACH_AUDIO</option>
+				  <option value="video">PLG_JLCOMMENTS_ATTACH_VIDEO</option>
+				  <option value="link">PLG_JLCOMMENTS_ATTACH_LINKS</option>
 				</field>
-				<field name="autoPublish" type="radio" default="1" label="Автопубликация" description="Автоматическая публикация комментария в статус пользователю">
-				  <option value="0">Нет</option>
-				  <option value="1">Да</option>
+				<field name="autoPublish" type="radio" default="1" label="PLG_JLCOMMENTS_PUBLISH_LABEL" description="PLG_JLCOMMENTS_PUBLISH_DESC">
+				  <option value="0">PLG_JLCOMMENTS_NO</option>
+				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
-				<field name="norealtime" type="radio" default="0" label="Автообновление" description="Обновление ленты комментариев в реальном времени">
-				  <option value="1">Нет</option>
-				  <option value="0">Да</option>
+				<field name="norealtime" type="radio" default="0" label="PLG_JLCOMMENTS_REAL_LABEL" description="PLG_JLCOMMENTS_REAL_DESC">
+				  <option value="1">PLG_JLCOMMENTS_NO</option>
+				  <option value="0">PLG_JLCOMMENTS_YES</option>
 				</field>
-				<field name="tp2" type="spacer" class="text" label="Настройки для Facebook"/>	
-				<field name="showfacebook" type="radio" default="0" label="Включить вкладку" description="Обновление ленты комментариев в реальном времени">
-				  <option value="0">Нет</option>
-				  <option value="1">Да</option>
+				<field name="tp2" type="spacer" class="text" label="PLG_JLCOMMENTS_FB_SITTINGS"/>	
+				<field name="showfacebook" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_FB_DESC">
+				  <option value="0">PLG_JLCOMMENTS_NO</option>
+				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
 				
-				<field name="fbId" type="text" label="Id Facebook" default=""/>
-				<field name="fbadmin" type="text" label="Модераторы Facebook" description="Введите имена пользователей через запятую" default=""/>
-				<field name="fb_lang" type="list" default="ru_RU" label="Язык Facebook" description="Выберите язык виджета">
+				<field name="fbId" type="text" label="PLG_JLCOMMENTS_IDFB_LABEL" default=""/>
+				<field name="fbadmin" type="text" label="PLG_JLCOMMENTS_MODERATOR_LABEL" description="PLG_JLCOMMENTS_MODERATOR_DESC" default=""/>
+				<field name="fb_lang" type="list" default="ru_RU" label="PLG_JLCOMMENTS_LANG_LABEL" description="PLG_JLCOMMENTS_LANG_DESC">
 				  <option value="ru_RU">Русский</option>
-				  <option value="en_US">Английскй</option>
+				  <option value="en_US">English</option>
 				</field>
-				<field name="tp3" type="spacer" class="text" label="Насройки Google+"/>
-				<field name="googleplus" type="radio" default="0" label="Включить вкладку" description="Обновление ленты комментариев в реальном времени">
-				  <option value="0">Нет</option>
-				  <option value="1">Да</option>
+				<field name="tp3" type="spacer" class="text" label="PLG_JLCOMMENTS_G_SITTINGS"/>
+				<field name="googleplus" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_G_DESC">
+				  <option value="0">PLG_JLCOMMENTS_NO</option>
+				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
-				<field name="tp4" type="spacer" class="text" label="Общие настройки"/>	
-				<field name="showjcomments" type="radio" default="0" label="Включить вкладку jcomments" description="Обновление ленты комментариев в реальном времени">
-				  <option value="0">Нет</option>
-				  <option value="1">Да</option>
+				<field name="tp4" type="spacer" class="text" label="PLG_JLCOMMENTS_ALL_SITTINGS"/>	
+				<field name="showjcomments" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_JCOMM_LABEL" description="PLG_JLCOMMENTS_TAB_ON_JCOMM_DESC">
+				  <option value="0">PLG_JLCOMMENTS_NO</option>
+				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
-				<field name="comLimit" type="text" label="Количество комментариев" default="10"/>
-				<field name="orders" type="text" label="Порядок вкладок" default="1,2,3,4" decription="1  Jcomments, 2  Vkontakte, 3 Google+ ,4 Facebook"/>
-				<field name="width" type="text" label="Ширина комментариев" default="500" description="Укажите ширину блока комментраиев. Если указано 0 - то по ширине страницы"/>
+				<field name="comLimit" type="text" label="PLG_JLCOMMENTS_COUNT_LABEL" default="10"/>
+				<field name="orders" type="text" label="PLG_JLCOMMENTS_ORDERS_LABEL" default="1,2,3,4" decription="PLG_JLCOMMENTS_ORDERS_DESC"/>
+				<field name="width" type="text" label="PLG_JLCOMMENTS_WIDTH_LABEL" default="500" description="PLG_JLCOMMENTS_WIDTH_DESC"/>
 				<field name="categories" type="category" extension='com_content' default="0" multiple="multiple"
-						label="Исключить категории"
-						description="Укажите категории в которых не будет добавляться виджет комментариев"/>
+						label="PLG_JLCOMMENTS_CAT_LABEL"
+						description="PLG_JLCOMMENTS_CAT_DESC"/>
 						
 				<field name="typeviewerjq" type="radio" default="1" label="PLG_JLCOMMENTS_TYPEVIEWER_LABEL" >
 					 <option value="0">PLG_JLCOMMENTS_NO</option>
