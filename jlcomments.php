@@ -2,7 +2,7 @@
 /**
  * JLcomments
  *
- * @version 1.0
+ * @version 2.1
  * @author Kunitsyn Vadim (vadim@joomline.ru), Artem Jukov (artem@joomline.ru)
  * @copyright (C) 2011 by Kunitsyn Vadim(http://www.joomline.ru)
  * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
@@ -196,7 +196,7 @@ HTML;
 					});
 				</script>
 								<div style="text-align: right;">
-									<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://joomline.ru/rasshirenija/plugin/jlcomments.html">Социальные комментарии joomla</a>
+									<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.afisha-irkutsk.ru">www.afisha-irkutsk.ru</a>
 								</div>
 HTML;
 
