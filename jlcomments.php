@@ -17,7 +17,7 @@ class plgContentJlcomments extends JPlugin
 {
 
 	public function onContentPrepare($context, &$article, &$params, $page = 0){
-
+		if($context == 'com_content.article'){
 		if (strpos($article->text, '{jlcomments-off}') !== false) {
 			$article->text = str_replace("{jlcomments-off}","",$article->text);
 			return true;
@@ -49,15 +49,13 @@ class plgContentJlcomments extends JPlugin
 				$typeviewerjq 	= $this->params->def('typeviewerjq');
 				$typeviewerbs 	= $this->params->def('typeviewerbs');
 				$typeviewernojq = $this->params->def('typeviewernojq');
+				$typeviewercss	= $this->params->def('typeviewercss');
 				
 				$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
 				$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
 				$doc->addCustomTag('<meta property="fb:app_id" content="'.$fbId.'"/>');
 				$doc->addScript("//vk.com/js/api/openapi.js?95");
 				$doc->addScript("https://apis.google.com/js/plusone.js");
-			//	$doc->addScript("/plugins/content/jlcomments/js/tabPane.js");
-			//	$doc->addScript("/plugins/content/jlcomments/js/demo.js");
-			//	$doc->addStyleSheet("/plugins/content/jlcomments/css/styles.css");
 				$doc->addScriptDeclaration($script);
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
@@ -67,9 +65,11 @@ class plgContentJlcomments extends JPlugin
 				If ($typeviewerjq==1) {
 					$doc->addCustomTag('<script src="http://yandex.st/jquery/1.9.1/jquery.min.js"></script>');
 					}
+				If ($typeviewercss==1) {
+					$doc->addStyleSheet("/plugins/content/jlcomments/css/jlcomtabs.css");
+					}
 				If ($typeviewerbs==1) {
 					$doc->addCustomTag('<script src="http://yandex.st/bootstrap/2.3.0/js/bootstrap.min.js"></script>');
-					$doc->addStyleSheet("/plugins/content/jlcomments/css/jlcomtabs.css");
 					}
 				If ($typeviewernojq==1) {
 					$doc->addCustomTag ('<script type="text/javascript">var jqjlcomm = jQuery.noConflict();</script>');
@@ -79,14 +79,14 @@ class plgContentJlcomments extends JPlugin
                 $comments = JPATH_SITE . '/components/com_jcomments/jcomments.php';
                   if (file_exists($comments)) {
                     require_once($comments);
-                    $options['object_id'] = $id;
+                    $options['object_id'] = $pagehash;
                     $options['object_group'] = 'com_content';
                     $options['published'] = 1;
                     $count = JCommentsModel::getCommentsCount($options);
                   }
 				
 	$scriptPage = <<<HTML
-		<ul class="nav nav-tabs" id="plgjlcomments">
+		<ul class="nav nav-tabs" id="plgjlcomments1">
 HTML;
 
 
@@ -192,7 +192,7 @@ HTML;
 				 </div>	
 				 <script type="text/javascript">
 					jQuery(document).ready(function(){
-					jQuery('#plgjlcomments a:first').tab('show');
+					jQuery('#plgjlcomments1 a:first').tab('show');
 					});
 				</script>
 								<div style="text-align: right;">
@@ -213,5 +213,5 @@ HTML;
 		}
 
 	}
-
+ }
 }

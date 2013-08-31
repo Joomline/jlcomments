@@ -79,7 +79,10 @@
 				<field name="categories" type="category" extension='com_content' default="0" multiple="multiple"
 						label="PLG_JLCOMMENTS_CAT_LABEL"
 						description="PLG_JLCOMMENTS_CAT_DESC"/>
-						
+				<field name="typeviewercss" type="radio" default="1" label="PLG_JLCOMMENTS_TYPEVIEWERCSS_LABEL" >
+					 <option value="0">PLG_JLCOMMENTS_NO</option>
+					 <option value="1">PLG_JLCOMMENTS_YES</option>
+				</field>		
 				<field name="typeviewerjq" type="radio" default="1" label="PLG_JLCOMMENTS_TYPEVIEWER_LABEL" >
 					 <option value="0">PLG_JLCOMMENTS_NO</option>
 					 <option value="1">PLG_JLCOMMENTS_YES</option>
@@ -97,4 +100,5 @@
 
 		</fields>
 	</config>
+	<updateservers><server type="extension" priority="1" name="Joomline">http://joomline.net/index.php?option=com_ars&amp;view=update&amp;task=stream&amp;format=xml&amp;id=7&amp;dummy=extension.xml</server></updateservers>
 </extension>
