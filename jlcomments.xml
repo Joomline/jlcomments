@@ -7,7 +7,7 @@
 	<license>GNU/GPL: http://www.gnu.org/copyleft/gpl.html</license>
 	<authorEmail>vadim@joomline.ru</authorEmail>
 	<authorUrl>http://joomline.ru</authorUrl>
-	<version>2.1</version>
+	<version>2.3</version>
 	<description>PLG_JLCOMMENTS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="jlcomments">jlcomments.php</filename>
@@ -63,6 +63,15 @@
 				  <option value="ru_RU">Русский</option>
 				  <option value="en_US">English</option>
 				</field>
+				<field name="colorscheme" type="list" default="light" label="PLG_JLCOMMENTS_COLORSCHEME_LABEL" description="PLG_JLCOMMENTS_COLORSCHEME_DESC">
+				  <option value="light">Light</option>
+				  <option value="dark">Dark</option>
+				</field>
+				<field name="orderbyfb" type="radio" default="0" label="PLG_JLCOMMENTS_ORDER_BY_FB_LABEL" description="PLG_JLCOMMENTS_ORDER_BY_FB_DESC">
+				  <option value="social">PLG_JLCOMMENTS_SOCIAL</option>
+				  <option value="reverse_time">PLG_JLCOMMENTS_REVERSE_TIME</option>
+				  <option value="time">PLG_JLCOMMENTS_TIME</option>
+				</field>
 				<field name="tp3" type="spacer" class="text" label="PLG_JLCOMMENTS_G_SITTINGS"/>
 				<field name="googleplus" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_G_DESC">
 				  <option value="0">PLG_JLCOMMENTS_NO</option>
@@ -95,7 +104,10 @@
 					 <option value="0">PLG_JLCOMMENTS_NO</option>
 					 <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
-				
+				<field name="link" type="radio" label="PLG_JLCOMMENTS_LINK_LABEL" description="PLG_JLCOMMENTS_LINK_DESCRIPTION" default="1">
+					<option value="0">PLG_JLCOMMENTS_YES</option>
+					<option value="1">PLG_JLCOMMENTS_NO</option>
+				</field>
 			</fieldset>
 
 		</fields>

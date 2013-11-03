@@ -37,19 +37,23 @@ class plgContentJlcomments extends JPlugin
 				$article_url = $base.JRoute::_(ContentHelperRoute::getArticleRoute($article->slug, $article->catid, $article->catslug));
 				
 
-				$apiId = $this->params->def('apiId');
-				$width = $this->params->def('width');
-				$comLimit = $this->params->def('comLimit');
-				$attach = $this->params->def('attach');
-				$autoPublish = $this->params->def('autoPublish');
-				$norealtime = $this->params->def('norealtime');
-				$fbId = $this->params->def('fbId');
-				$fbadmin = $this->params->def('fbadmin');
-				$fb_lang = $this->params->def('fb_lang');
+				$apiId 			= $this->params->def('apiId');
+				$width 			= $this->params->def('width');
+				$comLimit 		= $this->params->def('comLimit');
+				$attach 		= $this->params->def('attach');
+				$autoPublish	= $this->params->def('autoPublish');
+				$norealtime 	= $this->params->def('norealtime');
+				$fbId 			= $this->params->def('fbId');
+				$fbadmin 		= $this->params->def('fbadmin');
+				$fb_lang 		= $this->params->def('fb_lang');
 				$typeviewerjq 	= $this->params->def('typeviewerjq');
 				$typeviewerbs 	= $this->params->def('typeviewerbs');
 				$typeviewernojq = $this->params->def('typeviewernojq');
 				$typeviewercss	= $this->params->def('typeviewercss');
+				$link 			= $this->params->def('link');
+				$colorscheme 	= $this->params->def('colorscheme');
+				$order_by_fb	= $this->params->def('orderbyfb');
+				$linknone		= '';
 				
 				$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
 				$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
@@ -60,7 +64,10 @@ class plgContentJlcomments extends JPlugin
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
 				
-
+				if ($link==0){
+					$linknone = 'display:none;';
+					}
+				else {}
 				
 				If ($typeviewerjq==1) {
 					$doc->addCustomTag('<script src="http://yandex.st/jquery/1.9.1/jquery.min.js"></script>');
@@ -126,6 +133,10 @@ HTML;
 HTML;
 						} else {$scriptPage .='';} break;
 					case 4:	if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
+					<style>
+					.fb-comments, .fb-comments * {width:{$width}px !important;}
+					</style>
+				
 						<li style="list-style-type: none;"><a href="#" data-target="#fbcomm" data-toggle="tab"><div>Facebook (<fb:comments-count $article_url/> </fb:comments-count>)</div></a></li>
 HTML;
 						} else {$scriptPage .='';} break;
@@ -178,7 +189,7 @@ HTML;
 						js.src = "//connect.facebook.net/$fb_lang/all.js#xfbml=1";
 						d.getElementsByTagName('head')[0].appendChild(js);
 						}(document));</script>
-					<div class="fb-comments" data-href="$article_url" data-num-posts="$comLimit" data-width="$width"></div>
+					<div class="fb-comments" data-href="$article_url" data-num-posts="$comLimit" data-width="$width" data-colorscheme="$colorscheme" data-order-by="$order_by_fb"></div>
 					
 					</div>	
 				
@@ -195,9 +206,9 @@ HTML;
 					jQuery('#plgjlcomments1 a:first').tab('show');
 					});
 				</script>
-								<div style="text-align: right;">
-									<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.afisha-irkutsk.ru">www.afisha-irkutsk.ru</a>
-								</div>
+					<div style="text-align: right; $linknone;">
+						<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.afisha-irkutsk.ru">www.afisha-irkutsk.ru</a>
+					</div>
 HTML;
 
 				if ($this->params->def('autoAdd') == 1) {
