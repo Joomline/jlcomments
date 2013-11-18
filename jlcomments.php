@@ -124,8 +124,10 @@ HTML;
 									</li>
 HTML;
 						} else {$scriptPage .='';} break;
-					case 3:	if ($this->params->def('googleplus')) { $scriptPage .= <<<HTML
-					
+					case 3:	if ($this->params->def('googleplus')) {
+						
+						$scriptPage .= <<<HTML
+						
 						<li style="list-style-type: none;"><a href="#" data-target="#googlecomm" data-toggle="tab">Google+</a></li>
 
 									
@@ -169,7 +171,21 @@ HTML;
 								
 HTML;
 						} else {$scriptPage .='';} break;	
-					case 3: if ($this->params->def('googleplus')) { $scriptPage .= <<<HTML
+					case 3: if ($this->params->def('googleplus')) { 
+					$width_ = $width.'px';
+					$scriptPage .= <<<HTML
+					<script type="text/javascript">
+						jQuery(function($){
+							$('a[data-target="#googlecomm"]').click(function(){
+								$('div#___comments_0').css('width', '$width_' );
+								$('div#___comments_0').css('height', '100%' );
+							});							
+						});
+					</script>
+					<style>
+						div#___comments_0 * {width:$width_ !important;height:$width_ !important;}
+					</style>
+					
 					<div class="tab-pane" id="googlecomm">		
 		
 						<div class="g-comments"
