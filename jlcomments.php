@@ -63,6 +63,10 @@ class plgContentJlcomments extends JPlugin
 				$doc->addScriptDeclaration($script);
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
+				if (($this->params->def('googleid')!='')&&($this->params->def('googleplus'))){
+					$doc->addCustomTag('<link rel="author" href="https://plus.google.com/'. $this->params->def('googleid') .'/">');
+				}
+				else {}
 				
 				if ($link==0){
 					$linknone = 'display:none;';
@@ -183,7 +187,7 @@ HTML;
 						});
 					</script>
 					<style>
-						div#___comments_0 * {width:$width_ !important;height:$width_ !important;}
+						div#___comments_0 * {width:$width_ !important;min-height:600px !important;}
 					</style>
 					
 					<div class="tab-pane" id="googlecomm">		

@@ -23,8 +23,8 @@
     </languages>
 	<config>
 		<fields name="params">
-			<fieldset name="basic">
-				<field name="tp1" type="spacer" class="text" label="PLG_JLCOMMENTS_VK_SITTINGS"/>	
+		
+			<fieldset label="PLG_JLCOMMENTS_VK_SITTINGS" name="tp1">	
 				<field name="showvkontakte" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_VK_DESC">
 				  <option value="0">PLG_JLCOMMENTS_NO</option>
 				  <option value="1">PLG_JLCOMMENTS_YES</option>
@@ -51,7 +51,8 @@
 				  <option value="1">PLG_JLCOMMENTS_NO</option>
 				  <option value="0">PLG_JLCOMMENTS_YES</option>
 				</field>
-				<field name="tp2" type="spacer" class="text" label="PLG_JLCOMMENTS_FB_SITTINGS"/>	
+			</fieldset>
+			<fieldset name="tp2" label="PLG_JLCOMMENTS_FB_SITTINGS">	
 				<field name="showfacebook" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_FB_DESC">
 				  <option value="0">PLG_JLCOMMENTS_NO</option>
 				  <option value="1">PLG_JLCOMMENTS_YES</option>
@@ -72,12 +73,15 @@
 				  <option value="reverse_time">PLG_JLCOMMENTS_REVERSE_TIME</option>
 				  <option value="time">PLG_JLCOMMENTS_TIME</option>
 				</field>
-				<field name="tp3" type="spacer" class="text" label="PLG_JLCOMMENTS_G_SITTINGS"/>
+			</fieldset>
+			<fieldset name="tp3" label="PLG_JLCOMMENTS_G_SITTINGS">
 				<field name="googleplus" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_G_DESC">
 				  <option value="0">PLG_JLCOMMENTS_NO</option>
 				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
-				<field name="tp4" type="spacer" class="text" label="PLG_JLCOMMENTS_ALL_SITTINGS"/>	
+				<field name="googleid" type="text" label="PLG_JLCOMMENTS_GOOGLEID_LABEL" default=""/>
+			</fieldset>
+			<fieldset name="tp4" label="PLG_JLCOMMENTS_ALL_SITTINGS">	
 				<field name="showjcomments" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_JCOMM_LABEL" description="PLG_JLCOMMENTS_TAB_ON_JCOMM_DESC">
 				  <option value="0">PLG_JLCOMMENTS_NO</option>
 				  <option value="1">PLG_JLCOMMENTS_YES</option>
