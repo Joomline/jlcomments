@@ -97,7 +97,7 @@ class plgContentJlcomments extends JPlugin
                   }
 				
 	$scriptPage = <<<HTML
-		<ul class="nav nav-tabs" id="plgjlcomments1">
+		<br clear="all"><div id="jlcomments_container"><ul class="nav nav-tabs" id="plgjlcomments1">
 HTML;
 
 
@@ -221,6 +221,7 @@ HTML;
 }
 				 $scriptPage .= <<<HTML
 				 </div>	
+				 </div>
 				 <script type="text/javascript">
 					jQuery(document).ready(function(){
 					jQuery('#plgjlcomments1 a:first').tab('show');
