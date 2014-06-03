@@ -54,12 +54,18 @@ class plgContentJlcomments extends JPlugin
 				$colorscheme 	= $this->params->def('colorscheme');
 				$order_by_fb	= $this->params->def('orderbyfb');
 				$linknone		= '';
+				$lang = JFactory::getLanguage();
+				$lang->load('plg_content_jlcomments', JPATH_ADMINISTRATOR);
+				$jlcomments_comments = JText::_('PLG_JLCOMMENTS_COMMENTS');
+				$jlcomments_vk = JText::_('PLG_JLCOMMENTS_VK');
+				$jlcomments_fb = JText::_('PLG_JLCOMMENTS_FB');
+				$jlcomments_google = JText::_('PLG_JLCOMMENTS_GOOGLE');
 				
 				$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
 				$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
 				$doc->addCustomTag('<meta property="fb:app_id" content="'.$fbId.'"/>');
 				$doc->addScript("//vk.com/js/api/openapi.js?95");
-				$doc->addScript("https://apis.google.com/js/plusone.js");
+				$doc->addCustomTag('<script src="https://apis.google.com/js/plusone.js" type="text/javascript">{lang: "'.$fb_lang.'"}</script>');
 				$doc->addScriptDeclaration($script);
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
@@ -105,7 +111,7 @@ HTML;
 	foreach ($orders as $order) {
 				switch($order) {
 					case 1:	if ($this->params->def('showjcomments')) { $scriptPage .= <<<HTML
-						<li style="list-style-type: none;" class="active"><a data-target="#jcommentscomm" href="#" data-toggle="tab">Комментарии ($count)</a></li>
+						<li style="list-style-type: none;" class="active"><a href="#jcommentscomm" data-toggle="tab"><i class="jlico-comments"></i> $jlcomments_comments ($count)</a></li>
 HTML;
 						} else {$scriptPage .='';$showjcomments='-1';} break;
 					case 2:	if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
@@ -123,18 +129,14 @@ HTML;
 											}); 
 										});
 										</script>
-									<li style="list-style-type: none;">
-									<a href="#" data-target="#vkcomm" data-toggle="tab">Вконтакте (<span id="vk_count"></span>)</a>
-									</li>
+									<li style="list-style-type: none;"><a href="#vkcomm" data-toggle="tab"><i class="jlico-vk"></i> $jlcomments_vk (<span id="vk_count"></span>)</a></li>
 HTML;
 						} else {$scriptPage .='';} break;
 					case 3:	if ($this->params->def('googleplus')) {
 						
 						$scriptPage .= <<<HTML
 						
-						<li style="list-style-type: none;"><a href="#" data-target="#googlecomm" data-toggle="tab">Google+</a></li>
-
-									
+						<li style="list-style-type: none;"><a href="#googlecomm" data-toggle="tab"><i class="jlico-google"></i> $jlcomments_google</a></li>
 
 HTML;
 						} else {$scriptPage .='';} break;
@@ -143,7 +145,7 @@ HTML;
 					.fb-comments, .fb-comments * {width:{$width}px !important;}
 					</style>
 				
-						<li style="list-style-type: none;"><a href="#" data-target="#fbcomm" data-toggle="tab"><div>Facebook (<fb:comments-count $article_url/> </fb:comments-count>)</div></a></li>
+						<li style="list-style-type: none;"><a href="#fbcomm" data-toggle="tab"><div><i class="jlico-facebook"></i> $jlcomments_fb (<fb:comments-count $article_url/> </fb:comments-count>)</div></a></li>
 HTML;
 						} else {$scriptPage .='';} break;
 
@@ -222,13 +224,13 @@ HTML;
 				 $scriptPage .= <<<HTML
 				 </div>	
 				 </div>
-				 <script type="text/javascript">
-					jQuery(document).ready(function(){
-					jQuery('#plgjlcomments1 a:first').tab('show');
-					});
-				</script>
+<script type="text/javascript">
+jQuery(document).ready(function(){
+jQuery('#plgjlcomments1 a:first').tab('show');
+});
+</script>
 					<div style="text-align: right; $linknone;">
-						<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.afisha-irkutsk.ru">www.afisha-irkutsk.ru</a>
+						<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.38i.ru">www.38i.ru</a>
 					</div>
 HTML;
 
