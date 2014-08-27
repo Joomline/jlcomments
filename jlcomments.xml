@@ -50,6 +50,7 @@
 				  <option value="1">PLG_JLCOMMENTS_NO</option>
 				  <option value="0">PLG_JLCOMMENTS_YES</option>
 				</field>
+				<field name="widthvk" type="text" label="PLG_JLCOMMENTS_WIDTH_LABEL" default="0" description="PLG_JLCOMMENTS_WIDTH_DESC"/>
 			</fieldset>
 			<fieldset name="tp2" label="PLG_JLCOMMENTS_FB_SITTINGS">	
 				<field name="showfacebook" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_FB_DESC">
@@ -72,6 +73,7 @@
 				  <option value="reverse_time">PLG_JLCOMMENTS_REVERSE_TIME</option>
 				  <option value="time">PLG_JLCOMMENTS_TIME</option>
 				</field>
+				<field name="widthfb" type="text" label="PLG_JLCOMMENTS_WIDTH_LABEL" default="100%" description="PLG_JLCOMMENTS_WIDTH_DESC"/>
 			</fieldset>
 			<fieldset name="tp3" label="PLG_JLCOMMENTS_G_SITTINGS">
 				<field name="googleplus" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_LABEL" description="PLG_JLCOMMENTS_TAB_ON_G_DESC">
@@ -79,6 +81,7 @@
 				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
 				<field name="googleid" type="text" label="PLG_JLCOMMENTS_GOOGLEID_LABEL" default=""/>
+				<field name="widthgoogle" type="text" label="PLG_JLCOMMENTS_WIDTH_LABEL" default="500" description="PLG_JLCOMMENTS_WIDTH_DESC"/>
 			</fieldset>
 			<fieldset name="tp4" label="PLG_JLCOMMENTS_ALL_SITTINGS">	
 				<field name="showjcomments" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_JCOMM_LABEL" description="PLG_JLCOMMENTS_TAB_ON_JCOMM_DESC">
@@ -86,8 +89,7 @@
 				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
 				<field name="comLimit" type="text" label="PLG_JLCOMMENTS_COUNT_LABEL" default="10"/>
-				<field name="orders" type="text" label="PLG_JLCOMMENTS_ORDERS_LABEL" default="1,2,3,4" decription="PLG_JLCOMMENTS_ORDERS_DESC"/>
-				<field name="width" type="text" label="PLG_JLCOMMENTS_WIDTH_LABEL" default="500" description="PLG_JLCOMMENTS_WIDTH_DESC"/>
+				<field name="orders" type="text" label="PLG_JLCOMMENTS_ORDERS_LABEL" default="1,2,3,4" decription="PLG_JLCOMMENTS_ORDERS_DESC"/>				
 				<field name="categories" type="category" extension='com_content' default="0" multiple="multiple"
 						label="PLG_JLCOMMENTS_CAT_LABEL"
 						description="PLG_JLCOMMENTS_CAT_DESC"/>
