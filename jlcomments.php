@@ -2,7 +2,7 @@
 /**
  * JLcomments
  *
- * @version 2.1
+ * @version 2.6
  * @author Kunitsyn Vadim (vadim@joomline.ru), Artem Jukov (artem@joomline.ru)
  * @copyright (C) 2011 by Kunitsyn Vadim(http://www.joomline.ru)
  * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
@@ -135,14 +135,18 @@ HTML;
 HTML;
 			} else {$scriptPage .='';} break;
 			case 3:	if ($this->params->def('googleplus')) {
-						
+				$width_ = $widthgoogle.'px';		
 				$scriptPage .= <<<HTML
+					<style>
+						#googlecomm * {width:$width_ !important;min-height:600px !important;}
+					</style>
 					<li style="list-style-type: none;"><a href="#googlecomm" data-toggle="tab"><i class="jlico-google"></i> $jlcomments_google</a></li>
 HTML;
 			} else {$scriptPage .='';} break;
 			case 4:	if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
 				<style>
-					.fb-comments, .fb-comments * {width:100% !important;}
+					.fb-comments,.fb-comments span,.fb-comments iframe {min-height: 300px!important; width:100%!important;}
+					.fb_hide_iframes iframe {left:0px !important;}
 				</style>
 				
 				<li style="list-style-type: none;"><a href="#fbcomm" data-toggle="tab"><div><i class="jlico-facebook"></i> $jlcomments_fb (<fb:comments-count $article_url/> </fb:comments-count>)</div></a></li>
@@ -174,19 +178,10 @@ HTML;
 HTML;
 			} else {$scriptPage .='';} break;	
 			case 3: if ($this->params->def('googleplus')) { 
-				$width_ = $widthgoogle.'px';
+				
 				$scriptPage .= <<<HTML
-					<script type="text/javascript">
-						jQuery(function($){
-							$('a[data-target="#googlecomm"]').click(function(){
-								$('div#___comments_0').css('width', '$width_' );
-								$('div#___comments_0').css('height', '100%' );
-							});							
-						});
-					</script>
-					<style>
-						div#___comments_0 * {width:$width_ !important;min-height:600px !important;}
-					</style>
+
+
 					
 					<div class="tab-pane" id="googlecomm">		
 		
@@ -201,15 +196,17 @@ HTML;
 			} else {$scriptPage .='';} break;						
 			case 4: if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
                 <div class="tab-pane" id="fbcomm">
-                   	<script>(function(d){
-						var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-						js = d.createElement('script'); js.id = id; js.async = true;
-						js.src = "//connect.facebook.net/$fb_lang/all.js#xfbml=1";
-						d.getElementsByTagName('head')[0].appendChild(js);
-						}(document));
-					</script>
+						<script>(function(d, s, id) {
+						var js, fjs = d.getElementsByTagName(s)[0];
+						if (d.getElementById(id)) return;
+						js = d.createElement(s); js.id = id;
+						js.src = "//connect.facebook.net/$fb_lang/all.js#xfbml=1&version=v2.0";
+						fjs.parentNode.insertBefore(js, fjs);
+						}(document, 'script', 'facebook-jssdk'));</script>
 					<div class="fb-comments" data-href="$article_url" data-num-posts="$comLimit" data-width="$widthfb" data-colorscheme="$colorscheme" data-order-by="$order_by_fb"></div>
 				</div>				
+				
+
 HTML;
 			} else {$scriptPage .='';} break;
 		}
