@@ -149,7 +149,7 @@ HTML;
 					.fb_hide_iframes iframe {left:0px !important;}
 				</style>
 				
-				<li style="list-style-type: none;"><a href="#fbcomm" data-toggle="tab"><div><i class="jlico-facebook"></i> $jlcomments_fb (<fb:comments-count $article_url/> </fb:comments-count>)</div></a></li>
+				<li style="list-style-type: none;"><a href="#fbcomm" data-toggle="tab"><div><i class="jlico-facebook"></i> $jlcomments_fb (<span class="fb-comments-count" data-href="$article_url"></span>)</div></a></li>
 HTML;
 			} else {$scriptPage .='';} break;
 			}			
@@ -200,7 +200,7 @@ HTML;
 						var js, fjs = d.getElementsByTagName(s)[0];
 						if (d.getElementById(id)) return;
 						js = d.createElement(s); js.id = id;
-						js.src = "//connect.facebook.net/$fb_lang/all.js#xfbml=1&version=v2.0";
+						js.src = "//connect.facebook.net/$fb_lang/all.js#xfbml=1&version=v2.3";
 						fjs.parentNode.insertBefore(js, fjs);
 						}(document, 'script', 'facebook-jssdk'));</script>
 					<div class="fb-comments" data-href="$article_url" data-num-posts="$comLimit" data-width="$widthfb" data-colorscheme="$colorscheme" data-order-by="$order_by_fb"></div>
