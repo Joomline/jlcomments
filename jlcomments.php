@@ -67,7 +67,7 @@ class plgContentJlcomments extends JPlugin
 				$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
 				$doc->addCustomTag('<meta property="fb:app_id" content="'.$fbId.'"/>');
 				$doc->addScript("//vk.com/js/api/openapi.js?95");
-				$doc->addCustomTag('<script src="https://apis.google.com/js/plusone.js" type="text/javascript">{lang: "'.$fb_lang.'"}</script>');
+				$doc->addCustomTag('<script src="https://apis.google.com/js/plusone.js" type="text/javascript">/* {lang: "'.$fb_lang.'"} */</script>');
 				$doc->addScriptDeclaration($script);
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
@@ -105,7 +105,7 @@ class plgContentJlcomments extends JPlugin
                   }
 				
 	$scriptPage = <<<HTML
-		<br clear="all"><div id="jlcomments_container"><ul class="nav nav-tabs" id="plgjlcomments1">
+		<div style="clear:both">&nbsp;</div><div id="jlcomments_container"><ul class="nav nav-tabs" id="plgjlcomments1">
 HTML;
 
 
@@ -118,6 +118,7 @@ HTML;
 			} else {$scriptPage .='';$showjcomments='-1';} break;
 			case 2:	if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
 				<script type="text/javascript">
+					/* <![CDATA[ */
 					jQuery(document).ready(function(){
 					jQuery.ajax({
 					url: "https://api.vk.com/method/widgets.getComments.json?widget_api_id=$apiId&page_id=$pagehash",
@@ -130,24 +131,24 @@ HTML;
 					}
 					}); 
 					});
+					/* ]]> */
 				</script>
 				<li style="list-style-type: none;"><a href="#vkcomm" data-toggle="tab"><i class="jlico-vk"></i> $jlcomments_vk (<span id="vk_count"></span>)</a></li>
 HTML;
 			} else {$scriptPage .='';} break;
 			case 3:	if ($this->params->def('googleplus')) {
-				$width_ = $widthgoogle.'px';		
+				$width_ = $widthgoogle.'px';
+				$doc = JFactory::getDocument();
+				$style1 = '#googlecomm * {width:$width_ !important;min-height:600px !important;}';
+				$doc->addStyleDeclaration( $style1 );
 				$scriptPage .= <<<HTML
-					<style>
-						#googlecomm * {width:$width_ !important;min-height:600px !important;}
-					</style>
 					<li style="list-style-type: none;"><a href="#googlecomm" data-toggle="tab"><i class="jlico-google"></i> $jlcomments_google</a></li>
 HTML;
 			} else {$scriptPage .='';} break;
-			case 4:	if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
-				<style>
-					.fb-comments,.fb-comments span,.fb-comments iframe {min-height: 300px!important; width:100%!important;}
-					.fb_hide_iframes iframe {left:0px !important;}
-				</style>
+			case 4:	if ($this->params->def('showfacebook')) {$doc = JFactory::getDocument();
+				$style2 = '.fb-comments,.fb-comments span,.fb-comments iframe {min-height: 300px!important; width:100%!important;} .fb_hide_iframes iframe {left:0px !important;}';
+				$doc->addStyleDeclaration( $style2 );
+			$scriptPage .= <<<HTML
 				
 				<li style="list-style-type: none;"><a href="#fbcomm" data-toggle="tab"><div><i class="jlico-facebook"></i> $jlcomments_fb (<span class="fb-comments-count" data-href="$article_url"></span>)</div></a></li>
 HTML;
@@ -171,7 +172,9 @@ HTML;
 				<div class="tab-pane" id="vkcomm">
 					<div id='jlcomments'></div>
 						<script type='text/javascript'>
+						/* <![CDATA[ */
 							VK.Widgets.Comments('jlcomments', {limit: $comLimit, width: '$widthvk', attach: '$attach', autoPublish: $autoPublish, norealtime: $norealtime},$pagehash);
+						/* ]]> */
 						</script>
 				</div>
 								
@@ -196,13 +199,13 @@ HTML;
 			} else {$scriptPage .='';} break;						
 			case 4: if ($this->params->def('showfacebook')) { $scriptPage .= <<<HTML
                 <div class="tab-pane" id="fbcomm">
-						<script>(function(d, s, id) {
+						<script type="text/javascript">/* <![CDATA[ */(function(d, s, id) {
 						var js, fjs = d.getElementsByTagName(s)[0];
 						if (d.getElementById(id)) return;
 						js = d.createElement(s); js.id = id;
-						js.src = "//connect.facebook.net/$fb_lang/all.js#xfbml=1&version=v2.3";
+						js.src = "//connect.facebook.net/$fb_lang/all.js#xfbml=1&version=v2.0";
 						fjs.parentNode.insertBefore(js, fjs);
-						}(document, 'script', 'facebook-jssdk'));</script>
+						}(document, 'script', 'facebook-jssdk'));/* ]]> */</script>
 					<div class="fb-comments" data-href="$article_url" data-num-posts="$comLimit" data-width="$widthfb" data-colorscheme="$colorscheme" data-order-by="$order_by_fb"></div>
 				</div>				
 				
@@ -215,9 +218,11 @@ HTML;
 		 </div>	
 	</div>
 		<script type="text/javascript">
+			/* <![CDATA[ */
 			jQuery(document).ready(function(){
 			jQuery('#plgjlcomments1 a:first').tab('show');
 			});
+			/* ]]> */
 		</script>
 	<div style="text-align: right; $linknone;">
 		<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.38i.ru">www.38i.ru</a>
