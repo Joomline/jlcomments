@@ -2,9 +2,9 @@
 /**
  * JLcomments
  *
- * @version 2.6
+ * @version 2.7
  * @author Kunitsyn Vadim (vadim@joomline.ru), Artem Jukov (artem@joomline.ru)
- * @copyright (C) 2011 by Kunitsyn Vadim(http://www.joomline.ru)
+ * @copyright (C) 2011-2016 by Kunitsyn Vadim(http://www.joomline.ru)
  * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  **/
 

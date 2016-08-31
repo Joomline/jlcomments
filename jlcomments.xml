@@ -2,8 +2,8 @@
 <extension version="2.5" type="plugin" group="content" method="upgrade">
 	<name>PLG_JLCOMMENTS</name>
 	<author>JoomLine</author>
-	<creationDate>2014.06.03</creationDate>
-	<copyright>(C) 2011-2014 by Kunitsyn Vadim(http://www.joomline.ru)</copyright>
+	<creationDate>2016.08.31</creationDate>
+	<copyright>(C) 2011-2016 by Kunitsyn Vadim(http://www.joomline.ru)</copyright>
 	<license>GNU/GPL: http://www.gnu.org/copyleft/gpl.html</license>
 	<authorEmail>vadim@joomline.ru</authorEmail>
 	<authorUrl>http://joomline.ru</authorUrl>
