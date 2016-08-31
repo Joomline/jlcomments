@@ -82,13 +82,13 @@ class plgContentJlcomments extends JPlugin
 				else {}
 				
 				If ($typeviewerjq==1) {
-					$doc->addCustomTag('<script src="http://yandex.st/jquery/1.9.1/jquery.min.js"></script>');
+					$doc->addCustomTag('<script src="//yandex.st/jquery/1.9.1/jquery.min.js"></script>');
 					}
 				If ($typeviewercss==1) {
 					$doc->addStyleSheet("/plugins/content/jlcomments/css/jlcomtabs.css");
 					}
 				If ($typeviewerbs==1) {
-					$doc->addCustomTag('<script src="http://yandex.st/bootstrap/2.3.0/js/bootstrap.min.js"></script>');
+					$doc->addCustomTag('<script src="//yandex.st/bootstrap/2.3.0/js/bootstrap.min.js"></script>');
 					}
 				If ($typeviewernojq==1) {
 					$doc->addCustomTag ('<script type="text/javascript">var jqjlcomm = jQuery.noConflict();</script>');
