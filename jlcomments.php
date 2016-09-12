@@ -2,7 +2,7 @@
 /**
  * JLcomments
  *
- * @version 2.7
+ * @version 2.7.1
  * @author Kunitsyn Vadim (vadim@joomline.ru), Artem Jukov (artem@joomline.ru)
  * @copyright (C) 2011-2016 by Kunitsyn Vadim(http://www.joomline.ru)
  * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
@@ -66,8 +66,8 @@ class plgContentJlcomments extends JPlugin
 				$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
 				$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
 				$doc->addCustomTag('<meta property="fb:app_id" content="'.$fbId.'"/>');
-				$doc->addScript("//vk.com/js/api/openapi.js?95");
-				$doc->addCustomTag('<script src="https://apis.google.com/js/plusone.js" type="text/javascript">/* {lang: "'.$fb_lang.'"} */</script>');
+				$doc->addCustomTag('<script src="//vk.com/js/api/openapi.js?127" async="async"></script>');
+				$doc->addCustomTag('<script src="https://apis.google.com/js/plusone.js" type="text/javascript" async="async">/* {lang: "'.$fb_lang.'"} */</script>');
 				$doc->addScriptDeclaration($script);
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
@@ -88,7 +88,7 @@ class plgContentJlcomments extends JPlugin
 					$doc->addStyleSheet("/plugins/content/jlcomments/css/jlcomtabs.css");
 					}
 				If ($typeviewerbs==1) {
-					$doc->addCustomTag('<script src="//yandex.st/bootstrap/2.3.0/js/bootstrap.min.js"></script>');
+					$doc->addCustomTag('<script src="//yandex.st/bootstrap/2.3.0/js/bootstrap.min.js" async="async"></script>');
 					}
 				If ($typeviewernojq==1) {
 					$doc->addCustomTag ('<script type="text/javascript">var jqjlcomm = jQuery.noConflict();</script>');
