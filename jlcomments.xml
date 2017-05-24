@@ -2,12 +2,12 @@
 <extension version="2.5" type="plugin" group="content" method="upgrade">
 	<name>PLG_JLCOMMENTS</name>
 	<author>JoomLine</author>
-	<creationDate>2016.08.31</creationDate>
-	<copyright>(C) 2011-2016 by Kunitsyn Vadim(http://www.joomline.ru)</copyright>
+	<creationDate>2017.05.24</creationDate>
+	<copyright>(C) 2011-2017 by Kunitsyn Vadim(http://www.joomline.ru)</copyright>
 	<license>GNU/GPL: http://www.gnu.org/copyleft/gpl.html</license>
 	<authorEmail>vadim@joomline.ru</authorEmail>
 	<authorUrl>http://joomline.ru</authorUrl>
-	<version>2.7.1</version>
+	<version>2.7.2</version>
 	<description>PLG_JLCOMMENTS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="jlcomments">jlcomments.php</filename>
@@ -81,7 +81,7 @@
 				  <option value="1">PLG_JLCOMMENTS_YES</option>
 				</field>
 				<field name="googleid" type="text" label="PLG_JLCOMMENTS_GOOGLEID_LABEL" default=""/>
-				<field name="widthgoogle" type="text" label="PLG_JLCOMMENTS_WIDTH_LABEL" default="500" description="PLG_JLCOMMENTS_WIDTH_DESC"/>
+				<field name="widthgoogle" type="text" label="PLG_JLCOMMENTS_WIDTH_LABEL" default="100%" description="PLG_JLCOMMENTS_WIDTH_GOOGLE_DESC"/>
 			</fieldset>
 			<fieldset name="tp4" label="PLG_JLCOMMENTS_ALL_SITTINGS">	
 				<field name="showjcomments" type="radio" default="0" label="PLG_JLCOMMENTS_TAB_ON_JCOMM_LABEL" description="PLG_JLCOMMENTS_TAB_ON_JCOMM_DESC">

@@ -2,9 +2,9 @@
 /**
  * JLcomments
  *
- * @version 2.7.1
+ * @version 2.7.2
  * @author Kunitsyn Vadim (vadim@joomline.ru), Artem Jukov (artem@joomline.ru)
- * @copyright (C) 2011-2016 by Kunitsyn Vadim(http://www.joomline.ru)
+ * @copyright (C) 2011-2017 by Kunitsyn Vadim(http://www.joomline.ru)
  * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  **/
 
@@ -61,16 +61,29 @@ class plgContentJlcomments extends JPlugin
 				$jlcomments_comments = JText::_('PLG_JLCOMMENTS_COMMENTS');
 				$jlcomments_vk = JText::_('PLG_JLCOMMENTS_VK');
 				$jlcomments_fb = JText::_('PLG_JLCOMMENTS_FB');
-				$jlcomments_google = JText::_('PLG_JLCOMMENTS_GOOGLE');
+				$jlcomments_google = JText::_('PLG_JLCOMMENTS_GOOGLE');				
 				
-				$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
-				$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
-				$doc->addCustomTag('<meta property="fb:app_id" content="'.$fbId.'"/>');
-				$doc->addCustomTag('<script src="//vk.com/js/api/openapi.js?127" async="async"></script>');
-				$doc->addCustomTag('<script src="https://apis.google.com/js/plusone.js" type="text/javascript" async="async">/* {lang: "'.$fb_lang.'"} */</script>');
+				if ($this->params->def('showfacebook')) {
+					$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
+					$doc->addCustomTag('<meta property="fb:app_id" content="'.$fbId.'"/>');
+				}
+				else {}
+
+				if ($this->params->def('showvkontakte')) {
+					$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
+					$doc->addCustomTag('<script src="//vk.com/js/api/openapi.js?127" async="async"></script>');					
+				}
+				else {}
+				if  ($this->params->def('googleplus')) {
+					$doc->addCustomTag('<script src="https://apis.google.com/js/plusone.js" type="text/javascript" async="async">/* {lang: "'.$fb_lang.'"} */</script>');
+				}
+				else {}
+
 				$doc->addScriptDeclaration($script);
+
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
+
 				if (($this->params->def('googleid')!='')&&($this->params->def('googleplus'))){
 					$doc->addCustomTag('<link rel="author" href="https://plus.google.com/'. $this->params->def('googleid') .'/">');
 				}
@@ -137,9 +150,9 @@ HTML;
 HTML;
 			} else {$scriptPage .='';} break;
 			case 3:	if ($this->params->def('googleplus')) {
-				$width_ = $widthgoogle.'px';
+				$width_google = $widthgoogle;
 				$doc = JFactory::getDocument();
-				$style1 = '#googlecomm * {width:$width_ !important;min-height:600px !important;}';
+				$style1 = '#googlecomm * {width:'.$width_google.' !important;min-height:600px !important;}';
 				$doc->addStyleDeclaration( $style1 );
 				$scriptPage .= <<<HTML
 					<li style="list-style-type: none;"><a href="#googlecomm" data-toggle="tab"><i class="jlico-google"></i> $jlcomments_google</a></li>
@@ -190,7 +203,7 @@ HTML;
 		
 						<div class="g-comments"
 							data-href="$article_url"
-							data-width="$widthgoogle"
+							data-width="500"
 							data-first_party_property="BLOGGER"
 							data-view_type="FILTERED_POSTMOD">
 						</div>
