@@ -70,8 +70,9 @@ class plgContentJlcomments extends JPlugin
 				else {}
 
 				if ($this->params->def('showvkontakte')) {
-					$script = "VK.init({apiId: $apiId, onlyWidgets: true});";
-					$doc->addCustomTag('<script src="//vk.com/js/api/openapi.js?127" async="async"></script>');					
+					
+					$doc->addCustomTag('<script type="text/javascript" src="//vk.com/js/api/openapi.js?146"></script>');
+					$doc->addCustomTag('<script type="text/javascript">VK.init({apiId: '.$apiId.', onlyWidgets: true});</script>');			
 				}
 				else {}
 				if  ($this->params->def('googleplus')) {
@@ -131,7 +132,6 @@ HTML;
 			} else {$scriptPage .='';$showjcomments='-1';} break;
 			case 2:	if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
 				<script type="text/javascript">
-					/* <![CDATA[ */
 					jQuery(document).ready(function(){
 					jQuery.ajax({
 					url: "https://api.vk.com/method/widgets.getComments.json?widget_api_id=$apiId&page_id=$pagehash",
@@ -143,8 +143,7 @@ HTML;
 					console.log(data);
 					}
 					}); 
-					});
-					/* ]]> */
+					});				
 				</script>
 				<li style="list-style-type: none;"><a href="#vkcomm" data-toggle="tab"><i class="jlico-vk"></i> $jlcomments_vk (<span id="vk_count"></span>)</a></li>
 HTML;
@@ -184,10 +183,8 @@ HTML;
 			case 2: if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
 				<div class="tab-pane" id="vkcomm">
 					<div id='jlcomments'></div>
-						<script type='text/javascript'>
-						/* <![CDATA[ */
-							VK.Widgets.Comments('jlcomments', {limit: $comLimit, width: '$widthvk', attach: '$attach', autoPublish: $autoPublish, norealtime: $norealtime},$pagehash);
-						/* ]]> */
+						<script type='text/javascript'>						
+							VK.Widgets.Comments('jlcomments', {limit: $comLimit, width: '$widthvk', attach: '$attach', autoPublish: $autoPublish, norealtime: $norealtime},$pagehash);						
 						</script>
 				</div>
 								
