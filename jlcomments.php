@@ -79,8 +79,6 @@ class plgContentJlcomments extends JPlugin
 				}
 				else {}
 
-				$doc->addScriptDeclaration($script);
-
 				$pagehash = $article->id;
 				$orders = explode(",",$this->params->def('orders'));
 
