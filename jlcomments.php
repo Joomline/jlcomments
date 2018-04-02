@@ -132,7 +132,7 @@ HTML;
 					/* <![CDATA[ */
 					jQuery(document).ready(function(){
 					jQuery.ajax({
-					url: "https://api.vk.com/method/widgets.getComments.json?widget_api_id=$apiId&page_id=$pagehash",
+					url: "https://api.vk.com/method/widgets.getComments.json?widget_api_id=$apiId&page_id=$pagehash&v=5.73",
 					dataType: 'jsonp',
 					success: function(data){
 					jQuery('#vk_count').text(data.response.count); 
