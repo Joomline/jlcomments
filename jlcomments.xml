@@ -2,12 +2,12 @@
 <extension version="2.5" type="plugin" group="content" method="upgrade">
 	<name>PLG_JLCOMMENTS</name>
 	<author>JoomLine</author>
-	<creationDate>2017.05.30</creationDate>
-	<copyright>(C) 2011-2017 by Kunitsyn Vadim(http://www.joomline.ru)</copyright>
+	<creationDate>2018.04.02</creationDate>
+	<copyright>(C) 2011-2018 by Kunitsyn Vadim(http://www.joomline.ru)</copyright>
 	<license>GNU/GPL: http://www.gnu.org/copyleft/gpl.html</license>
 	<authorEmail>vadim@joomline.ru</authorEmail>
-	<authorUrl>http://joomline.ru</authorUrl>
-	<version>2.7.3</version>
+	<authorUrl>https://joomline.ru</authorUrl>
+	<version>2.7.4</version>
 	<description>PLG_JLCOMMENTS_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="jlcomments">jlcomments.php</filename>
