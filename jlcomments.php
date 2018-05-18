@@ -2,9 +2,9 @@
 /**
  * JLcomments
  *
- * @version 2.7.2
+ * @version 2.7.5
  * @author Kunitsyn Vadim (vadim@joomline.ru), Artem Jukov (artem@joomline.ru)
- * @copyright (C) 2011-2017 by Kunitsyn Vadim(http://www.joomline.ru)
+ * @copyright (C) 2011-2018 by Kunitsyn Vadim(http://www.joomline.ru)
  * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
  **/
 
@@ -62,7 +62,7 @@ class plgContentJlcomments extends JPlugin
 				$jlcomments_vk = JText::_('PLG_JLCOMMENTS_VK');
 				$jlcomments_fb = JText::_('PLG_JLCOMMENTS_FB');
 				$jlcomments_google = JText::_('PLG_JLCOMMENTS_GOOGLE');				
-				
+				$pagehash = $article->id;
 				if ($this->params->def('showfacebook')) {
 					$doc->addCustomTag('<meta property="fb:admins" content="'.$fbadmin.'"/>');
 					$doc->addCustomTag('<meta property="fb:app_id" content="'.$fbId.'"/>');
@@ -70,8 +70,39 @@ class plgContentJlcomments extends JPlugin
 				else {}
 
 				if ($this->params->def('showvkontakte')) {				
-					$doc->addCustomTag('<script src="//vk.com/js/api/openapi.js?127"></script>');	
-					$doc->addCustomTag('<script>VK.init({apiId: '.$apiId.', onlyWidgets: true});</script>');					
+					$doc->addCustomTag('
+					<script type="text/javascript">
+					jQuery.getScript(
+					  "//vk.com/js/api/openapi.js",
+					  function() {
+
+						VK.init({apiId: '.$apiId.',onlyWidgets:true});
+						
+						VK.Widgets.Comments(
+						"jlcomments", {
+							limit: '.$comLimit.', 
+							width: "'.$widthvk.'", 
+							attach: "'.$attach.'", 
+							autoPublish: '.$autoPublish.', 
+							norealtime: '.$norealtime.'
+							},'.$pagehash.');
+						
+						VK.Api.call(
+							"widgets.getComments", {
+								 widget_api_id: "'.$apiId.'",
+								 page_id: '.$pagehash.',
+								 v: "5.75"
+							},
+							function(r) {								
+								var count = r.response.count;
+								vk_comments_count
+								jQuery("#vk_comments_count").html(count);
+							}
+						);
+					  }
+					);
+					</script>
+					');										
 				}
 				else {}
 				if  ($this->params->def('googleplus')) {
@@ -79,7 +110,7 @@ class plgContentJlcomments extends JPlugin
 				}
 				else {}
 
-				$pagehash = $article->id;
+				
 				$orders = explode(",",$this->params->def('orders'));
 
 				if (($this->params->def('googleid')!='')&&($this->params->def('googleplus'))){
@@ -120,31 +151,16 @@ class plgContentJlcomments extends JPlugin
 HTML;
 
 
-
+ 
 	foreach ($orders as $order) {
+		
 		switch($order) {
 			case 1:	if ($this->params->def('showjcomments')) { $scriptPage .= <<<HTML
 				<li style="list-style-type: none;" class="active"><a href="#jcommentscomm" data-toggle="tab"><i class="jlico-comments"></i> $jlcomments_comments ($count)</a></li>
 HTML;
 			} else {$scriptPage .='';$showjcomments='-1';} break;
 			case 2:	if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
-				<script type="text/javascript">
-					/* <![CDATA[ */
-					jQuery(document).ready(function(){
-					jQuery.ajax({
-					url: "https://api.vk.com/method/widgets.getComments.json?widget_api_id=$apiId&page_id=$pagehash&v=5.73",
-					dataType: 'jsonp',
-					success: function(data){
-					jQuery('#vk_count').text(data.response.count); 
-					},
-					error: function(data){
-					console.log(data);
-					}
-					}); 
-					});
-					/* ]]> */
-				</script>
-				<li style="list-style-type: none;"><a href="#vkcomm" data-toggle="tab"><i class="jlico-vk"></i> $jlcomments_vk (<span id="vk_count"></span>)</a></li>
+				<li style="list-style-type: none;"><a href="#vkcomm" data-toggle="tab"><i class="jlico-vk"></i> $jlcomments_vk (<span id="vk_comments_count"></span>)</a></li>
 HTML;
 			} else {$scriptPage .='';} break;
 			case 3:	if ($this->params->def('googleplus')) {
@@ -181,12 +197,7 @@ HTML;
 			} else {$scriptPage .='';$showjcomments='-1';} break;
 			case 2: if ($this->params->def('showvkontakte')) { $scriptPage .= <<<HTML
 				<div class="tab-pane" id="vkcomm">
-					<div id='jlcomments'></div>
-						<script type='text/javascript'>
-						/* <![CDATA[ */
-							VK.Widgets.Comments('jlcomments', {limit: $comLimit, width: '$widthvk', attach: '$attach', autoPublish: $autoPublish, norealtime: $norealtime},$pagehash);
-						/* ]]> */
-						</script>
+					<div id="jlcomments"></div>
 				</div>
 								
 HTML;
@@ -194,9 +205,6 @@ HTML;
 			case 3: if ($this->params->def('googleplus')) { 
 				
 				$scriptPage .= <<<HTML
-
-
-					
 					<div class="tab-pane" id="googlecomm">		
 		
 						<div class="g-comments"
@@ -228,12 +236,10 @@ HTML;
 	$scriptPage .= <<<HTML
 		 </div>	
 	</div>
-		<script type="text/javascript">
-			/* <![CDATA[ */
+		<script type="text/javascript">			
 			jQuery(document).ready(function(){
 			jQuery('#plgjlcomments1 a:first').tab('show');
-			});
-			/* ]]> */
+			});			
 		</script>
 	<div style="text-align: right; $linknone;">
 		<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.38i.ru">www.38i.ru</a>
