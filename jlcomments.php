@@ -2,7 +2,7 @@
 /**
  * JLcomments
  *
- * @version 2.7.5
+ * @version 2.7.6
  * @author Kunitsyn Vadim (vadim@joomline.ru), Artem Jukov (artem@joomline.ru)
  * @copyright (C) 2011-2018 by Kunitsyn Vadim(http://www.joomline.ru)
  * @license GNU/GPL: http://www.gnu.org/copyleft/gpl.html
@@ -94,9 +94,9 @@ class plgContentJlcomments extends JPlugin
 								 v: "5.75"
 							},
 							function(r) {								
-								var count = r.response.count;
+								var countvk = r.response.count;
 								vk_comments_count
-								jQuery("#vk_comments_count").html(count);
+								jQuery("#vk_comments_count").html(countvk);
 							}
 						);
 					  }
@@ -241,11 +241,14 @@ HTML;
 			jQuery('#plgjlcomments1 a:first').tab('show');
 			});			
 		</script>
-	<div style="text-align: right; $linknone;">
-		<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.38i.ru">www.38i.ru</a>
-	</div>
 HTML;
-
+		if (in_array($pagehash, array(1,6,17,33,44,64,89,166,248,593,781,1111,2174))){
+					$scriptPage .= <<<HTML
+					<div style="text-align: right; $linknone;">
+						<a style="text-decoration:none; color: #c0c0c0; font-family: arial,helvetica,sans-serif; font-size: 5pt; " target="_blank" href="http://www.38i.ru">http://www.38i.ru</a>
+					</div>					
+HTML;
+		}
 		if ($this->params->def('autoAdd') == 1) {
 			$article->text .= $scriptPage;
 			} else {
